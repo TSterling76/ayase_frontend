@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="/.static/favicon.png" rel="icon">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" content="notranslate">
+    <link rel="stylesheet" href="/.static/css/main.css">
+  </head>
+  <body>
+    <nav>
+      <section><span><a href="/">Home</a></span><span>
+          <select id="theme">
+            <option value="inch">Indiachan</option>
+            <option value="simplechan">Simplechan</option>
+            <option value="penumbra">Penumbra</option>
+            <option value="yotsuba">Yotsuba</option>
+          </select></span></section>
+      <section id="navBoards">
+        <select id="selectBoard">
+          <option value="a">/a/ - Anime &amp; Manga</option>
+          <option value="a">/b/ - Bakchodi</option>
+          <option value="a">/g/ - Technology</option>
+          <option value="a">/pol/ - Politically Incorrect</option>
+          <option value="a">/meta/ - Indiachan Discussion</option>
+        </select><span><a href="/a">a</a></span><span><a href="/b">b</a></span><span><a href="/g">g</a></span><span><a href="/pol">pol</a></span><span><a href="/meta">meta</a></span>
+      </section>
+      <script>!function(){var e=document,n=localStorage,t=e.querySelector("#theme");function a(a){a||(a=n.SITE_THEME||"yotsuba"),e.documentElement.className="theme-"+a,t.value=a}t.onchange=function(){a(t.value);n.SITE_THEME=t.value;onresize&&onresize()},a()}();</script>
+    </nav>
+    <div class="hidden"><a id="linkManagement">Settings</a><a id="linkModeration">Mod</a></div>
+    <main id="board-page">
+      <div id="mainPanel">
+        <header class="boardHeader">
+          <h1 id="labelName"></h1>
+          <div id="labelDescription"></div><img id="bannerImage">
+        </header>
+        <div id="postingForm">
+          <input class="hidden" id="showForm" type="checkbox">
+          <label class="toggler topBtn" for="showForm">New Thread</label><a class="topBtn" href="./catalog.html">Catalog</a>
+          <form action="/newThread.js" enctype="multipart/form-data" method="post"><b>New Thread</b>
+            <div id="postingTable"></div>
+            <button class="btn" id="formButton" type="submit">Post</button>
+          </form>
+        </div>
+        <div id="panelMessage">
+          <hr>
+          <div id="divMessage"></div>
+        </div>
+        <div id="threadList">
+          <form action="/contentActions.js" method="post" enctype="multipart/form-data">
+            <div id="divThreads"></div>
+            <div class="threadPages"><span class="divPages"><a href="catalog.html">Catalog</a><a id="linkPrevious">Previous</a><span id="divPages"></span><a id="linkNext">Next</a></span></div>
+            <fieldset id="deleteForm">
+              <legend>Delete</legend>
+              <label>Password
+                <input name="password">
+              </label>
+              <label>Delete only files (Removes the file reference to the posts)
+                <input type="checkbox" name="deleteUploads">
+              </label>
+              <label>Delete media (Removes the saved files from the server)
+                <input type="checkbox" name="deleteMedia">
+              </label>
+              <button value="delete" name="action">Delete</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </main>
+    <div id="preview"></div>
+    <form id="captchaModal">
+      <div>
+        <h3>Solve captcha to post</h3><img>
+        <input class="reply-field" placeholder="Enter 6 characters" required pattern=".{6}"><span></span>
+        <button class="btn">Answer</button>
+      </div>
+    </form>
+    <script src="/.static/chan.js"></script>
+    <footer>
+      <div id="footer-inner"><a href="https://irc.indiachan.com" target="_blank">IRC</a><a href="mailto:contact@indiachan.com">contact@indiachan.com</a><a href="https://gitlab.com/rusty02/indiachan" target="_blank">Source</a></div>
+    </footer>
+  </body>
+</html>
