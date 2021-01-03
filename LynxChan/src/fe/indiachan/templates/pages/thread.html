@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="/.static/favicon.png" rel="icon">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" content="notranslate">
+    <link rel="stylesheet" href="/.static/css/main.css">
+  </head>
+  <body>
+    <nav>
+      <section><span><a href="/">Home</a></span><span>
+          <select id="theme">
+            <option value="inch">Indiachan</option>
+            <option value="simplechan">Simplechan</option>
+            <option value="penumbra">Penumbra</option>
+            <option value="yotsuba">Yotsuba</option>
+          </select></span></section>
+      <section id="navBoards">
+        <select id="selectBoard">
+          <option value="a">/a/ - Anime &amp; Manga</option>
+          <option value="a">/b/ - Bakchodi</option>
+          <option value="a">/g/ - Technology</option>
+          <option value="a">/pol/ - Politically Incorrect</option>
+          <option value="a">/meta/ - Indiachan Discussion</option>
+        </select><span><a href="/a">a</a></span><span><a href="/b">b</a></span><span><a href="/g">g</a></span><span><a href="/pol">pol</a></span><span><a href="/meta">meta</a></span>
+      </section>
+      <script>!function(){var e=document,n=localStorage,t=e.querySelector("#theme");function a(a){a||(a=n.SITE_THEME||"yotsuba"),e.documentElement.className="theme-"+a,t.value=a}t.onchange=function(){a(t.value);n.SITE_THEME=t.value;onresize&&onresize()},a()}();</script>
+    </nav>
+    <div class="hidden"><a id="linkManagement">Settings</a><a id="linkMod">Mod</a></div>
+    <main id="thread-page">
+      <div id="mainPanel">
+        <header class="boardHeader">
+          <h1 id="labelName"></h1>
+          <div id="labelDescription"></div><img id="bannerImage">
+        </header>
+        <div id="postingForm">
+          <input class="hidden" id="showForm" type="checkbox">
+          <label class="toggler topBtn" for="showForm">Reply</label><a class="topBtn" href="../catalog.html">Catalog</a>
+          <form action="/replyThread.js" enctype="multipart/form-data" method="post"><b>Reply</b>
+            <div id="postingTable"></div>
+            <button class="btn" id="formButton" type="submit">Post</button>
+          </form>
+        </div>
+        <div id="divControls">
+          <form action="/changeThreadSettings.js" method="post" enctype="multipart/form-data">
+            <fieldset id="settingsFieldset">
+              <legend>Thread Settings</legend>
+              <label>
+                <input class="threadSettingsField" id="checkboxLock" name="lock" type="checkbox">Lock
+              </label>
+              <label>
+                <input class="threadSettingsField" id="checkboxPin" name="pin" type="checkbox">Pin
+              </label>
+              <label>
+                <input class="threadSettingsField" id="checkboxCyclic" type="checkbox" name="cyclic">Cyclic
+              </label>
+              <input id="controlBoardIdentifier" type="hidden" name="boardUri">
+              <input id="controlThreadIdentifier" type="hidden" name="threadId">
+              <button id="settingsFormButon" type="submit">Save</button>
+            </fieldset>
+          </form>
+        </div>
+        <div id="divArchive">
+          <form action="/archiveThread.js" method="post" enctype="multipart/form-data">
+            <fieldset id="settingsFieldset">
+              <legend>Archive Thread</legend>
+              <label>
+                <input class="archiveField" id="checkboxArchive" name="confirmation" type="checkbox">Yes, I wish to lock and archive this thread
+              </label>
+              <input id="archiveBoardIdentifier" type="hidden" name="boardUri">
+              <input id="archiveThreadIdentifier" type="hidden" name="threadId">
+              <button id="archiveFormButon" type="submit">Archive</button>
+            </fieldset>
+          </form>
+        </div>
+        <div id="transferControls">
+          <form class="formTransfer" id="formTransfer" action="/transferThread.js" enctype="multipart/form-data" method="post">
+            <fieldset id="settingsFieldset">
+              <legend>Transfer Thread</legend>
+              <input id="transferBoardIdentifier" type="hidden" name="boardUri">
+              <input id="transferThreadIdentifier" type="hidden" name="threadId">
+              <label>Destination board:
+                <input class="transferField" id="fieldDestinationBoard" type="text" name="boardUriDestination">
+              </label>
+              <button id="transferFormButton" type="submit">Transfer thread</button>
+            </fieldset>
+          </form>
+        </div>
+        <div id="ipDelete">
+          <form id="ipDeletionForm" method="post" action="/deleteFromIp.js" enctype="multipart/form-data">
+            <fieldset id="settingsFieldset">
+              <legend>Delete from IP</legend>
+              <label>Non-hashed ip:
+                <input class="ipDeletionField" id="ipField" type="text" name="ip">
+              </label>
+              <label>
+                Delete only from these boards(Ex:"b v", leaving blank will delete
+                from all boards)
+                <input class="ipDeletionField" id="fieldBoards" type="text" name="boards">
+              </label>
+              <button id="deleteFromIpFormButton" type="submit">Delete from IP</button>
+            </fieldset>
+          </form>
+        </div>
+        <div id="panelMessage">
+          <hr>
+          <div id="divMessage"></div>
+        </div>
+        <div id="threadList">
+          <form method="post" action="/contentActions.js" enctype="multipart/form-data">
+            <div id="divThreads"></div>
+            <fieldset id="deleteForm">
+              <legend>Delete</legend>
+              <label>Password
+                <input name="password">
+              </label>
+              <label>Delete only files (Removes the file reference to the posts)
+                <input type="checkbox" name="deleteUploads">
+              </label>
+              <label>Delete media (Removes the saved files from the server)
+                <input type="checkbox" name="deleteMedia">
+              </label>
+              <button value="delete" name="action">Delete</button>
+            </fieldset>
+            <div id="divMod">
+              <p>Mod</p>
+              <label>Ban duration (Defaults to 5 years):
+                <input class="banField" id="fieldDuration" name="duration">
+              </label>
+              <label>Message
+                <input class="banField" id="fieldbanMessage" name="banMessage">
+              </label>
+              <label>Type:
+                <select id="comboBoxBanTypes" name="banType">
+                  <option value="0">Regular ban</option>
+                  <option value="1">Range ban (1/2 octects)</option>
+                  <option value="2">Range ban (3/4 octects)</option>
+                </select>
+              </label>
+              <label>
+                <input class="ipDeletionField" id="ipDeletionConfirmationCheckbox" type="checkbox" name="confirmation" value="true">Confirm board-wise ip deletion
+              </label>
+              <button id="inputIpDelete" type="submit" value="ip-deletion" name="action">Delete by ip on this board</button>
+              <button id="inputBan" type="submit" value="ban" name="action">Ban</button>
+              <button id="inputSpoil" type="submit" value="spoil" name="action">Spoil Files</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <div id="preview"></div>
+    <form id="captchaModal">
+      <div>
+        <h3>Solve captcha to post</h3><img>
+        <input class="reply-field" placeholder="Enter 6 characters" required pattern=".{6}"><span></span>
+        <button class="btn">Answer</button>
+      </div>
+    </form>
+    <script src="/.static/chan.js"></script>
+    <footer>
+      <div id="footer-inner"><a href="https://irc.indiachan.com" target="_blank">IRC</a><a href="mailto:contact@indiachan.com">contact@indiachan.com</a><a href="https://gitlab.com/rusty02/indiachan" target="_blank">Source</a></div>
+    </footer>
+  </body>
+</html>
